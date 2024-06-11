@@ -2,19 +2,18 @@ require "rails_helper"
 
 describe "/actors" do
   it "lists the names of each Actor record in the Actor table", points: 1 do
-    
     ashley_johnson = Actor.new
     ashley_johnson.name = "Ashley Johnson"
     ashley_johnson.dob = 28.years.ago
     ashley_johnson.image = ""
     ashley_johnson.save
-    
+
     gugu = Actor.new
     gugu.name = "Gugu Mbatha-Raw"
     gugu.dob = 38.years.ago
     gugu.image = ""
     gugu.save
-    
+
     idris = Actor.new
     idris.name = "Idris Elba"
     idris.dob = 58.years.ago
@@ -25,10 +24,10 @@ describe "/actors" do
 
     expect(page).to have_text(ashley_johnson.name),
       "Expected page to have the name, 'Ashley Johnson'"
-    
+
     expect(page).to have_text(gugu.name),
       "Expected page to have the name, '#{gugu.name}'"
-    
+
     expect(page).to have_text(idris.name),
       "Expected page to have the name, '#{idris.name}'"
   end
@@ -36,19 +35,18 @@ end
 
 describe "/actors" do
   it "has a 'Show details' link to the details page of each Actor", points: 1 do
-    
     ashley_johnson = Actor.new
     ashley_johnson.name = "Ashley Johnson"
     ashley_johnson.dob = 28.years.ago
     ashley_johnson.image = ""
     ashley_johnson.save
-    
+
     gugu = Actor.new
     gugu.name = "Gugu Mbatha-Raw"
     gugu.dob = 38.years.ago
     gugu.image = ""
     gugu.save
-    
+
     idris = Actor.new
     idris.name = "Idris Elba"
     idris.dob = 58.years.ago
@@ -57,21 +55,19 @@ describe "/actors" do
 
     visit "/actors"
 
-    expect(page).to have_tag("a", :with => { :href => "/actors/#{ashley_johnson.id}" }, :text => /Show\s+details/i),
+    expect(page).to have_tag("a", with: { href: "/actors/#{ashley_johnson.id}" }, text: /Show\s+details/i),
       "Expected page to have the a link with the text 'Show details' and an href of '/actors/#{ashley_johnson.id}'"
 
-    expect(page).to have_tag("a", :with => { :href => "/actors/#{gugu.id}" }, :text => /Show\s+details/i),
+    expect(page).to have_tag("a", with: { href: "/actors/#{gugu.id}" }, text: /Show\s+details/i),
       "Expected page to have the a link with the text 'Show details' and an href of '/actors/#{gugu.id}'"
 
-    expect(page).to have_tag("a", :with => { :href => "/actors/#{idris.id}" }, :text => /Show\s+details/i),
+    expect(page).to have_tag("a", with: { href: "/actors/#{idris.id}" }, text: /Show\s+details/i),
       "Expected page to have the a link with the text 'Show details' and an href of '/actors/#{idris.id}'"
-
   end
 end
 
 describe "/actors/ACTOR ID]" do
   it "displays the name of the Actor record", points: 1 do
-    
     gugu = Actor.new
     gugu.name = "Gugu Mbatha-Raw"
     gugu.dob = 38.years.ago
@@ -82,13 +78,11 @@ describe "/actors/ACTOR ID]" do
 
     expect(page).to have_text(gugu.name),
       "Expected page to have the name, '#{gugu.name}'"
-      
   end
 end
 
 describe "/actors/ACTOR ID]" do
   it "displays the dob of the Actor record", points: 1 do
-    
     ashley_johnson = Actor.new
     ashley_johnson.name = "Ashley Johnson"
     ashley_johnson.dob = 28.years.ago
@@ -99,13 +93,11 @@ describe "/actors/ACTOR ID]" do
 
     expect(page).to have_text(ashley_johnson.dob),
       "Expected page to have the text, '#{ashley_johnson.dob}'"
-
   end
 end
 
 describe "/actors/ACTOR ID]" do
   it "displays the names of every Character the Actor has played", points: 1 do
-    
     ashley_johnson = Actor.new
     ashley_johnson.name = "Ashley Johnson"
     ashley_johnson.dob = 28.years.ago
@@ -145,13 +137,11 @@ describe "/actors/ACTOR ID]" do
 
     expect(page).to have_text(mt.name),
       "Expected page to have the text, '#{mt.name}'"
-
   end
 end
 
 describe "/actors/ACTOR ID]" do
   it "displays the names of the Directors of each Movie the Actor has starred in", points: 1 do
-    
     ashley_johnson = Actor.new
     ashley_johnson.name = "Ashley Johnson"
     ashley_johnson.dob = 28.years.ago
@@ -208,8 +198,7 @@ describe "/actors/ACTOR ID]" do
 
     expect(page).to have_text(director.name)
 
-    expect(page).to have_text(other_director.name)#,
-      # "Expected page to have the text, '#{other_director.name}'"
-
+    expect(page).to have_text(other_director.name) # ,
+    # "Expected page to have the text, '#{other_director.name}'"
   end
 end

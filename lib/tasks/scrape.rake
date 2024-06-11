@@ -1,6 +1,6 @@
 task(:scrape) do
-  require 'mechanize'
-  require 'date'
+  require "mechanize"
+  require "date"
   mechanize = Mechanize.new
   url = "https://www.imdb.com/chart/top/?ref_=nv_mv_250"
   page = mechanize.get(url)
@@ -10,7 +10,7 @@ task(:scrape) do
   movie_ids = Array.new
 
   movie_attr.each do |movie|
-    link = movie.attr('href')
+    link = movie.attr("href")
     if link != nil
       imdb_ids.push(link.split("/")[2])
     end
@@ -20,7 +20,7 @@ task(:scrape) do
   Tmdb::Api.key(ENV.fetch("TMDB_KEY"))
 
   imdb_ids.uniq.each do |imdb_id|
-    movie_info = Tmdb::Find.movie(imdb_id, external_source: 'imdb_id')[0]
+    movie_info = Tmdb::Find.movie(imdb_id, external_source: "imdb_id")[0]
     if !movie_info.nil?
       movie_ids.push(movie_info.id)
     end
@@ -54,7 +54,7 @@ task(:scrape) do
     if director_obj.profile_path != nil
       details.store(:image, "https://image.tmdb.org/t/p/w500" + director_obj.profile_path)
     else
-      details.store(:image, src="https://robohash.org/" + director_obj.name + "?set=set3")
+      details.store(:image, "https://robohash.org/" + director_obj.name + "?set=set3")
     end
     details.store(:created_at, "2015-08-12 17:20:11")
     details.store(:updated_at, "2015-08-12 17:20:11")
@@ -65,7 +65,6 @@ task(:scrape) do
   character_details = Array.new
   actor_details = Array.new
 
-  require "date"
   movies.each do |movie|
     details = Hash.new
     details.store(:id, movie_details.count + 1)
@@ -89,7 +88,7 @@ task(:scrape) do
       character_hash.store(:updated_at, "2015-08-12 17:20:11")
       played_by = Tmdb::Search.person(character.name)
       if played_by.results[0] != nil
-        actor_id =  played_by.results[0].id
+        actor_id = played_by.results[0].id
         character_hash.store(:actor_id, actor_id)
         actor_hash = Hash.new
         actor_obj = Tmdb::Person.detail(actor_id)
@@ -100,7 +99,7 @@ task(:scrape) do
         if actor_obj.profile_path != nil
           actor_hash.store(:image, "https://image.tmdb.org/t/p/w500" + actor_obj.profile_path)
         else
-          actor_hash.store(:image, src="https://robohash.org/" + actor_obj.name + "?set=set3")
+          actor_hash.store(:image, "https://robohash.org/" + actor_obj.name + "?set=set3")
         end
         actor_hash.store(:created_at, "2015-08-12 17:20:11")
         actor_hash.store(:updated_at, "2015-08-12 17:20:11")
@@ -144,6 +143,5 @@ task(:scrape) do
     end
   HEREDOC
 
-File.write("#{file_path}/dev.rake", "#{file_contents}")
-
+  File.write("#{file_path}/dev.rake", "#{file_contents}")
 end
