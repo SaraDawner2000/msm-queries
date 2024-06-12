@@ -13,6 +13,7 @@ class PagesController < ApplicationController
   def selected_actor
     actor_id = params[:actor_id]
     @actor = Actor.where(id: actor_id).first
+    @filmography = Character.all.where(actor_id: actor_id)
   end
   def selected_director
   end
