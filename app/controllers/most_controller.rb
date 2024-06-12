@@ -2,6 +2,6 @@ class MostController < ApplicationController
   def youngest
   end
 
-  def oldest
+  def eldest
   end
 end

@@ -1,2 +1,22 @@
-<h1>Pages#directors</h1>
-<p>Find me in app/views/pages/directors.html.erb</p>
+<h1>List of all directors</h1>
+<hr>
+<table>
+  <thead>
+    <th>ID</th>
+    <th>Image</th>
+    <th>Name</th>
+    <th>Dob</th>
+    <th></th>
+  </thead>
+  <tbody>
+  <%@directors_record.each do |director|%>
+    <tr>
+      <td><%=director[:id]%></td>
+      <td><img src="<%=director[:image]%>" style="width:250px" alt="<%=director[:name]%>'s photo"></td>
+      <td><%=director[:name]%></td>
+      <td><%=director[:dob]%></td>
+      <td><a href="/directors/<%=director[:id]%>">Show details</a></td>
+    </tr>
+  <%end%>
+  </tbody>
+</table>
