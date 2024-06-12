@@ -1,2 +1,26 @@
-<h1>Pages#movies</h1>
-<p>Find me in app/views/pages/movies.html.erb</p>
+<h1>List of all movies</h1>
+<hr>
+<table>
+  <thead>
+    <th>ID</th>
+    <th>Image</th>
+    <th>Title</th>
+    <th>Year</th>
+    <th>Director</th>
+    <th></th>
+  </thead>
+  <tbody>
+  <%@movies_record.each do |movie|%>
+    <tr>
+      <td><%=movie[:id]%></td>
+      <td><img src="<%=movie[:image]%>" width="250px" alt="<%=movie[:title]%>'s poster"></td>
+      <td><%=movie[:title]%></td>
+      <td><%=movie[:year]%></td>
+      <%# TODO: fetch director for this movie %>
+      <% director = Director.where(id: movie.director_id).at(0) %>
+      <td><%= director.name %></td>
+      <td><a href="/movies/<%=movie[:id]%>">Show details</a></td>
+    </tr>
+  <%end%>
+  </tbody>
+</table>
