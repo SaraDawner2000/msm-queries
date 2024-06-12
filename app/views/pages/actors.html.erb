@@ -1,7 +1,22 @@
-<h1>Pages#actors</h1>
-<p>Find me in app/views/pages/actors.html.erb</p>
-<%@directors_record.each do |director|%>
-  <ul>
-    <li><%=director%></li>
-  </ul>>
-<%end%>
+<h1>List of all actors</h1>
+<hr>
+<table>
+  <thead>
+    <th>ID</th>
+    <th>Image</th>
+    <th>Name</th>
+    <th>Dob</th>
+    <th></th>
+  </thead>
+  <tbody>
+  <%@actors_record.each do |actor|%>
+    <tr>
+      <td><%=actor[:id]%></td>
+      <td><img src="<%=actor[:image]%>" style="width:250px" alt="<%=actor[:name]%>'s photo"></td>
+      <td><%=actor[:name]%></td>
+      <td><%=actor[:dob]%></td>
+      <td><a href="/actors/<%=actor[:id]%>">Show details</a></td>
+    </tr>
+  <%end%>
+  </tbody>
+</table>
