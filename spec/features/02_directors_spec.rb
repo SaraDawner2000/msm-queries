@@ -24,10 +24,10 @@ describe "/directors" do
 
     expect(page).to have_text(director.name),
       "Expected page to have the name, '#{director.name}'"
-
+    
     expect(page).to have_text(other_director.name),
       "Expected page to have the name, '#{other_director.name}'"
-
+    
     expect(page).to have_text(iris_roy.name),
       "Expected page to have the name, '#{iris_roy.name}'"
   end
@@ -55,14 +55,15 @@ describe "/directors" do
 
     visit "/directors"
 
-    expect(page).to have_tag("a", with: { href: "/directors/#{director.id}" }, text: /Show\s+details/i),
+    expect(page).to have_tag("a", :with => { :href => "/directors/#{director.id}" }, :text => /Show\s+details/i),
       "Expected page to have the a link with the text 'Show details' and an href of '/directors/#{director.id}'"
 
-    expect(page).to have_tag("a", with: { href: "/directors/#{other_director.id}" }, text: /Show\s+details/i),
+    expect(page).to have_tag("a", :with => { :href => "/directors/#{other_director.id}" }, :text => /Show\s+details/i),
       "Expected page to have the a link with the text 'Show details' and an href of '/directors/#{other_director.id}'"
-
-    expect(page).to have_tag("a", with: { href: "/directors/#{iris_roy.id}" }, text: /Show\s+details/i),
+    
+    expect(page).to have_tag("a", :with => { :href => "/directors/#{iris_roy.id}" }, :text => /Show\s+details/i),
       "Expected page to have the a link with the text 'Show details' and an href of '/directors/#{iris_roy.id}'"
+
   end
 end
 
@@ -176,6 +177,7 @@ end
 
 describe "/directors/[DIRECTOR ID]" do
   it "has a 'Show details' link to the details page of each Movie in the Director's filmography", points: 1 do
+    
     director = Director.new
     director.name = "Matthew Mercer"
     director.dob = 36.years.ago
@@ -214,13 +216,14 @@ describe "/directors/[DIRECTOR ID]" do
 
     visit "/directors/#{director.id}"
 
-    expect(page).to have_tag("a", with: { href: "/movies/#{the_turgle.id}" }, text: /Show\s+details/i),
+    expect(page).to have_tag("a", :with => { :href => "/movies/#{the_turgle.id}" }, :text => /Show\s+details/i),
       "Expected page to have the a link with the text 'Show details' and an href of '/movies/#{the_turgle.id}'"
 
-    expect(page).to have_tag("a", with: { href: "/movies/#{deep_impact.id}" }, text: /Show\s+details/i),
+    expect(page).to have_tag("a", :with => { :href => "/movies/#{deep_impact.id}" }, :text => /Show\s+details/i),
       "Expected page to have the a link with the text 'Show details' and an href of '/movies/#{deep_impact.id}'"
 
-    expect(page).to_not have_tag("a", with: { href: "/movies/#{hello_world.id}" }, text: /Show\s+details/i),
+    expect(page).to_not have_tag("a", :with => { :href => "/movies/#{hello_world.id}" }, :text => /Show\s+details/i),
       "Expected page to NOT have the a link with the text 'Show details' and an href of '/movies/#{hello_world.id}'"
+
   end
 end
